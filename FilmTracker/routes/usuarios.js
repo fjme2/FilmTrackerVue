@@ -58,7 +58,7 @@ usuarios.post('/', function (pet, res) {
         });
     }
     else {
-        resp.status(400).send('Falta el username o la contraseña');
+        res.status(400).send('Falta el username o la contraseña');
     }
 })
 
