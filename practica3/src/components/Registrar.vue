@@ -1,42 +1,37 @@
 <template>
   <v-layout row>
     <v-flex xs6 offset-xs3>
-      <div class="white elevation-2">
-        <v-toolbar flat dense class="cyan" dark>
-          <v-toolbar-title>Registrar</v-toolbar-title>
-        </v-toolbar>
+    <panel title="Registrar">
+        <v-text-field
+          label="Usuario"
+          single-line
+          outline
+          v-model="username"
+        ></v-text-field>
+        <v-text-field
+          label="Email"
+          single-line
+          outline
+          v-model="email"
+        ></v-text-field>
+        <v-text-field
+          label="Contraseña"
+          single-line
+          outline
+          v-model="password"
+          :type="'password'"
+        ></v-text-field>
+        <v-btn class="cyan" @click="registrar">Registrar</v-btn>
 
-        <div class="pl-4 pr-4 pt-2 pb-2">
-          <v-text-field
-            label="Usuario"
-            single-line
-            outline
-            v-model="username"
-          ></v-text-field>
-          <v-text-field
-            label="Email"
-            single-line
-            outline
-            v-model="email"
-          ></v-text-field>
-          <v-text-field
-            label="Contraseña"
-            single-line
-            outline
-            v-model="password"
-            :type="'password'"
-          ></v-text-field>
-          <v-btn class="cyan" @click="registrar">Registrar</v-btn>
-
-          <div class="error" v-html="error" />
-        </div>
-      </div>
+        <div class="error" v-html="error" />
+      </panel>
     </v-flex>
   </v-layout>
 </template>
 
 <script>
 import AutenticarService from '@/services/AutenticarService'
+import Panel from '@/components/Panel'
 
 export default {
   data(){
@@ -60,6 +55,9 @@ export default {
         this.error = error.response.data.error
       }
     }
+  },
+  components:{
+    Panel
   }
 }
 </script>
