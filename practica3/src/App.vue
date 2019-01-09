@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <v-app>
-      <hello-world />
+      <Header />
       
       <main>
         <v-container fluid>
@@ -13,12 +13,12 @@
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Header from '@/components/Header.vue'
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    Header
   }
 }
 </script>
