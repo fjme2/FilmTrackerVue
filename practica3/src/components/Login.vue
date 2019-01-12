@@ -43,6 +43,7 @@ export default {
           password: this.password
         })
         this.$store.dispatch('setToken', response.data.token)
+        this.$router.push({name: 'peliculas'})
         
       }catch(error){
         this.error = error.response.data.error

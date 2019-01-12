@@ -1,6 +1,15 @@
 <template>
   <v-toolbar fixed class="cyan">
-    <v-toolbar-title class="mr-4">FilmTracker</v-toolbar-title>
+    <v-toolbar-title class="mr-4">
+       <router-link 
+        class="home"
+        tag="span"
+        :to="{
+          name: 'peliculas'
+        }">
+        FilmTracker
+      </router-link>
+    </v-toolbar-title>
     <v-spacer></v-spacer>
     <v-toolbar-items><v-btn 
       v-if="!$store.state.isLogged"
@@ -29,4 +38,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.home {
+  cursor: pointer;
+}
 </style>

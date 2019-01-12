@@ -12,5 +12,9 @@ export default {
     mostrar(peliId, token){
         return Api().get(`pelicula/${peliId}`,{headers: {
             'Authorization': btoa(token)}})
+    },
+    borrar(peli, token){
+        return Api().delete('pelicula',{headers: {
+            'Authorization': btoa(token)}, data: peli})
     }
 }

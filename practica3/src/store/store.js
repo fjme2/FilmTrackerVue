@@ -29,6 +29,8 @@ export default new Vuex.Store({
             commit('setToken',token)
         }
         
+    },getters :{
+        logeado: state => state.isLogged
     }
 
 })

@@ -10,11 +10,14 @@
           :to="{name:'peli', params: {peliId: peli.id}}">
           <v-icon>info</v-icon>
           </v-btn>
-          <v-btn small><v-icon>delete</v-icon></v-btn>
+          <v-btn small @click="borrar(peli)"><v-icon>delete</v-icon></v-btn>
           </div>
           <router-link :to="{name: 'crear-pelicula'}">
             <v-btn small><v-icon>add</v-icon></v-btn>
           </router-link>
+          <div class="error">
+            {{error}}
+          </div>
       </panel>
       <div class="error" v-if="!$store.state.isLogged">
             No tiene permisos.
@@ -36,12 +39,23 @@ export default {
   },
   data(){
     return{
-       pelis: null
+       pelis: null,
+       error: null
     }
   },
   async mounted(){
     
     this.pelis = (await PeliculasService.allPeliculas(this.$store.state.token)).data
+  },
+  methods:{
+    async borrar(peli){
+      try{
+        await PeliculasService.borrar(peli,this.$store.state.token)
+        this.pelis = (await PeliculasService.allPeliculas(this.$store.state.token)).data
+      }catch(err){
+        this.error = err
+      }
+    }
   }
 }
 

@@ -109,6 +109,7 @@ pelicula.post('/', auth,function (pet, res){
 
 //Borrar un usario
 pelicula.delete('/',auth, function(req,res){
+  console.log(req.body)
   let sql = 'delete from pelicula where id= ?';
   db.query(sql,[req.body.id],(err, results) => {
       if (err) {

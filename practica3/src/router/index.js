@@ -5,11 +5,11 @@ import Login from '@/components/Login'
 import Peliculas from '@/components/Peliculas'
 import CrearPelicula from '@/components/CrearPelicula'
 import DetallesPelicula from '@/components/DetallesPelicula'
+import store from '@/store/store'
 
 Vue.use(VueRouter)
 
-export default new VueRouter({
-
+const router =  new VueRouter({
     routes:[
         {
             path:'/registrar',
@@ -35,10 +35,28 @@ export default new VueRouter({
             path:'/peliculas/:peliId',
             name:'peli',
             component: DetallesPelicula
-        },
-        {
-            path:'*',
-            redirect: 'login'
         }
     ]   
+});
+
+const openRoutes=['login','registrarse'];
+router.beforeEach((to, from, next) => {
+    //Evita que un usuario no logeado entre en una pagina que requiere autenticacion y viceversa
+
+    if(store.getters.logeado){
+        if(openRoutes.includes(to.name)){
+            next('/peliculas')
+        }else{
+            next()
+        }
+    }else{
+        if(openRoutes.includes(to.name)){
+            next()
+        }else{
+            next('/login')
+        }
+    }
+
 })
+
+export default router
