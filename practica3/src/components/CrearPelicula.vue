@@ -1,7 +1,7 @@
 <template>
   <v-layout row>
     <v-flex xs10 offset-xs1>
-      <panel title="Crear Pelicula">
+      <panel title="Crear Pelicula" v-if="$store.state.isLogged">
           <v-text-field
           label="id"
           single-line
@@ -39,6 +39,9 @@
         </div>
         <v-btn small @click="crear"><v-icon>add</v-icon></v-btn>
       </panel>
+      <div class="error" v-if="!$store.state.isLogged">
+            No tiene permisos.
+      </div>
     </v-flex>
   </v-layout>
 </template>
@@ -69,7 +72,7 @@ export default {
                 this.error = 'Rellena todos los campos obligatorios'
             }
             try{
-                const response = await PeliculasService.crearPelicula(this.peli)
+                const response = await PeliculasService.crearPelicula(this.peli, this.$store.state.token)
                 if(response.status == '200'){
                     this.error = 'Ya existe una pelicula con ese id.'
                 }else{

@@ -10,29 +10,35 @@ Vue.use(VueRouter)
 
 export default new VueRouter({
 
-    routes:[{
-        path:'/registrar',
-        name:'registrar',
-        component: Registrar
-    },
-    {
-        path:'/login',
-        name:'login',
-        component: Login
-    },
-    {
-        path:'/peliculas',
-        name:'peliculas',
-        component: Peliculas
-    },
-    {
-        path:'/peliculas/crear',
-        name:'crear-pelicula',
-        component: CrearPelicula
-    },
-    {
-        path:'/peliculas/:peliId',
-        name:'peli',
-        component: DetallesPelicula
-    }]
+    routes:[
+        {
+            path:'/registrar',
+            name:'registrar',
+            component: Registrar
+        },
+        {
+            path:'/login',
+            name:'login',
+            component: Login
+        },
+        {
+            path:'/peliculas',
+            name:'peliculas',
+            component: Peliculas
+        },
+        {
+            path:'/peliculas/crear',
+            name:'crear-pelicula',
+            component: CrearPelicula
+        },
+        {
+            path:'/peliculas/:peliId',
+            name:'peli',
+            component: DetallesPelicula
+        },
+        {
+            path:'*',
+            redirect: 'login'
+        }
+    ]   
 })

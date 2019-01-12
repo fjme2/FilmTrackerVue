@@ -65,7 +65,7 @@ pelicula.get('/:id', function(req,res){
 
 })
 
-pelicula.get('/', function (pet, res) {
+pelicula.get('/',auth, function (pet, res) {
   let sql = 'Select * from pelicula';
   db.query(sql, (err, results) => {
 
@@ -78,7 +78,7 @@ pelicula.get('/', function (pet, res) {
 
 });
 
-pelicula.post('/', function (pet, res){
+pelicula.post('/', auth,function (pet, res){
   var nuevo = pet.body
   let buscar = 'SELECT COUNT(id) AS cantidad FROM pelicula where id="' + nuevo.id + '";';
   let sql = 'SELECT id, titulo, fecha, overview FROM pelicula where id=?';
