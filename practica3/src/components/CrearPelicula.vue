@@ -72,7 +72,10 @@ export default {
                 const response = await PeliculasService.crearPelicula(this.peli)
                 if(response.status == '200'){
                     this.error = 'Ya existe una pelicula con ese id.'
+                }else{
+                    this.$router.push({name: 'peliculas'})
                 }
+                
             }catch(err){
                 this.error = 'Error al añadir pelicula'
             }
