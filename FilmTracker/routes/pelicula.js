@@ -65,7 +65,7 @@ pelicula.get('/:id', function(req,res){
 
 })
 
-pelicula.get('/',auth, function (pet, res) {
+pelicula.get('/', function (pet, res) {
   let sql = 'Select * from pelicula';
   db.query(sql, (err, results) => {
 
@@ -78,7 +78,7 @@ pelicula.get('/',auth, function (pet, res) {
 
 });
 
-pelicula.post('/',auth, function (pet, res){
+pelicula.post('/', function (pet, res){
   var nuevo = pet.body
   let buscar = 'SELECT COUNT(id) AS cantidad FROM pelicula where id="' + nuevo.id + '";';
   let sql = 'SELECT id, titulo, fecha, overview FROM pelicula where id=?';
@@ -90,14 +90,18 @@ pelicula.post('/',auth, function (pet, res){
     //Si ya existe no lo insertamos
     if (rows[0].cantidad == 1) {
       res.status(200).send('Ya existe una pelicula con ese id');
+      console.log('Ya existe una pelicula con ese id')
     }else{
 
       db.query(insertar, [nuevo.id, nuevo.titulo, nuevo.fecha, nuevo.overview], function (err, rows, fields) {
         if (err) {
           res.status(400).send(err);
+        }else{
+          res.status(201).send(nuevo)
+          console.log('Pelicula Añadida')
         }
       });
-      res.status(201).send(nuevo)
+      
   }
   });
 
