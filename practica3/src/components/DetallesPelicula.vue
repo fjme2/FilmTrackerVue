@@ -1,3 +1,4 @@
+//Componente que muestra los detalles de una pelicula
 <template>
 <v-layout row>
     <v-flex xs8 offset-xs2>
@@ -37,7 +38,7 @@
         <div class="error" v-if="error">
             {{error}}
         </div>
-              <div class="error" v-if="!$store.state.isLogged">
+        <div class="error" v-if="!$store.state.isLogged">
             No tiene permisos.
       </div>
     </v-flex>
@@ -56,7 +57,9 @@ export default {
         }
     },
     async mounted(){
+        //Se coge el id que ha pasado por parametro el componente Peliculas
         const peliId = this.$store.state.route.params.peliId
+        //Se le pide al servidor la información de una pelicula pasandole un id y el token del usuario
         this.peli = (await PeliculasService.mostrar(peliId, this.$store.state.token)).data
 
     },

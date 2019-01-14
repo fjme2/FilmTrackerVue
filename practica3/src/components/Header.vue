@@ -1,3 +1,6 @@
+//Componente de la cabecera de la web
+//Se muestra el nombre de la aplicación y un botón de Login y otro de Registrar si el usuario no está logeado
+//Y un botón de Logout si el usuario está logeado
 <template>
   <v-toolbar fixed class="cyan">
     <v-toolbar-title class="mr-4">
@@ -29,6 +32,7 @@
 export default {
     methods:{
       logout(){
+        //Se borra el token del usuario y se le redirige al componente de login
         this.$store.dispatch('setToken', null)
         this.$router.push({name: 'login'})
       }

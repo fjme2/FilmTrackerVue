@@ -1,3 +1,5 @@
+// Componente para crear una pelicula.
+// Se pide el id, titulo, fecha y overview de una pelicula.
 <template>
   <v-layout row>
     <v-flex xs10 offset-xs1>
@@ -52,6 +54,7 @@ import PeliculasService from '@/services/PeliculasService'
 export default {
     data(){
         return{
+            //Declaramos el objeto pelicula
             peli: {
                 id: '',
                 titulo: '',
@@ -65,6 +68,8 @@ export default {
     methods:{
         async crear(){
             this.error = null
+            //Obligamos a que se rellenen todos los campos para poder crear una pelicula
+            //de no ser así se mostrará un mensaje de error
             const rellenados = Object 
             .keys(this.peli)
             .every(key => !!this.peli[key])
@@ -72,10 +77,13 @@ export default {
                 this.error = 'Rellena todos los campos obligatorios'
             }
             try{
+                //Llamamos al servidor pasandole un objeto de tipo peli y el token del usuario
                 const response = await PeliculasService.crearPelicula(this.peli, this.$store.state.token)
                 if(response.status == '200'){
+                    //Si el id de la pelicula ya está en la base de datos se muestra un error
                     this.error = 'Ya existe una pelicula con ese id.'
                 }else{
+                    //Si la pelicula se crea sin errores se redirige al listado de peliculas
                     this.$router.push({name: 'peliculas'})
                 }
                 

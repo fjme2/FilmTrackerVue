@@ -9,6 +9,7 @@ import store from '@/store/store'
 
 Vue.use(VueRouter)
 
+//En esta clase se usa vue-router para crear las rutas de la aplicación
 const router =  new VueRouter({
     routes:[
         {
@@ -35,14 +36,18 @@ const router =  new VueRouter({
             path:'/peliculas/:peliId',
             name:'peli',
             component: DetallesPelicula
-        }
+        },
+        {
+          path: '*',
+          redirect: 'peliculas'
+    }
     ]   
 });
 
-const openRoutes=['login','registrarse'];
+const openRoutes=['login','registrar'];
 router.beforeEach((to, from, next) => {
     //Evita que un usuario no logeado entre en una pagina que requiere autenticacion y viceversa
-
+    //Las unicas que no necesitan autenticacion son login y registrar
     if(store.getters.logeado){
         if(openRoutes.includes(to.name)){
             next('/peliculas')

@@ -1,3 +1,4 @@
+//Componente de un panel genérico
 <template>
       <div class="white elevation-2">
         <v-toolbar flat dense class="cyan" dark>

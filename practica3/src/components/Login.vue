@@ -1,3 +1,5 @@
+//Componente del Login
+//Se pide un usuario y contraseña
 <template>
   <v-layout row>
     <v-flex xs6 offset-xs3>
@@ -16,9 +18,10 @@
             :type="'password'"
           ></v-text-field>
           <v-btn class="cyan" @click="login">Entrar</v-btn>
-
-          <div class="error" v-html="error" />
       </panel>
+      <div class="error">
+            {{error}}
+      </div>
     </v-flex>
   </v-layout>
 </template>
@@ -36,17 +39,22 @@ export default {
     }
   },
   methods:{
+    //Metodo para logear al usuario
     async login(){
       try{
+        //Se le envia al servidor el usuario y contraseña introducidos
         const response = await AutenticarService.login({
           username: this.username,
           password: this.password
         })
-        this.$store.dispatch('setToken', response.data.token)
-        this.$router.push({name: 'peliculas'})
+        if(response.status == '200'){
+          //Si es correcto se guarda el token y se le redirige a la lista de peliculas
+          this.$store.dispatch('setToken', response.data.token)
+          this.$router.push({name: 'peliculas'})
+        }
         
-      }catch(error){
-        this.error = error.response.data.error
+      }catch(err){
+        this.error = err.response.data.error
       }
     }
   },

@@ -55,9 +55,11 @@ pelicula.get('/:id', function(req,res){
       db.query(insertar, [data.id, data.title, data.release_date, data.overview], function (err, rows, fields) {
         if (err) {
             res.status(400).send(err);
+        }else{
+          res.status(200).send(body)
         }
       });
-      res.status(200).send(body)
+      
     });
 
     }

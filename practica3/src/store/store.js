@@ -4,16 +4,20 @@ import createPersistedState from 'vuex-persistedstate'
 
 Vue.use(Vuex)
 
+//Clase para gestionar el estado de aplicación de forma centralizada
 export default new Vuex.Store({
     strict: true,
     plugins: [
         createPersistedState()
     ],
     state:{
+        //Token de un usuario
         token: null,
+        //Si el usuario está logeado
         isLogged: false
     },
     mutations:{
+        //Si existe token significa que el usuario está logeado
         setToken(state,token){
             state.token = token
             if(token){
